@@ -20,6 +20,52 @@ class Channel:
         self.video_count = channel["items"][0]["statistics"]["videoCount"]
         self.view_count = channel["items"][0]["statistics"]["viewCount"]
 
+    def __str__(self):
+        """Метод возвращает название и ссылку на канал"""
+        return f"{self.title} ({self.url})"
+
+    def __add__(self, other):
+        """
+        Метод для сложения кол-во подписчиков
+        """
+        return int(self.subscriber_count) + int(other.subscriber_count)
+
+    def __sub__(self, other):
+        """
+        Метод для вычитания кол-во подписчиков
+        """
+        return int(self.subscriber_count) - int(other.subscriber_count)
+
+    def __gt__(self, other):
+        """
+        Метод для сравнения > кол-во подписчиков
+        """
+        return int(self.subscriber_count) > int(other.subscriber_count)
+
+    def __ge__(self, other):
+        """
+        Метод для сравнения >= кол-во подписчиков
+        """
+        return int(self.subscriber_count) >= int(other.subscriber_count)
+
+    def __lt__(self, other):
+        """
+        Метод для сравнения < кол-во подписчиков
+        """
+        return int(self.subscriber_count) < int(other.subscriber_count)
+
+    def __le__(self, other):
+        """
+        Метод для сравнения <= кол-во подписчиков
+        """
+        return int(self.subscriber_count) <= int(other.subscriber_count)
+
+    def __eq__(self, other):
+        """
+        Метод для сравнения == кол-во подписчиков
+        """
+        return int(self.subscriber_count) == int(other.subscriber_count)
+
     def print_info(self) -> None:
         """Выводит в консоль информацию о канале."""
         channel = self.youtube.channels().list(id=self.__channel_id, part='snippet,statistics').execute()
