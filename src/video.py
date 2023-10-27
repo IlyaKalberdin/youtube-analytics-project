@@ -13,20 +13,20 @@ class Video:
         video = self.youtube.videos().list(part='snippet,statistics,contentDetails,topicDetails', id=video_id).execute()
 
         self.video_id = video_id
-        self.name = video["items"][0]["snippet"]["title"]
+        self.title = video["items"][0]["snippet"]["title"]
         self.url = f"https://www.youtube.com/watch?v={video_id}"
         self.view_count = video["items"][0]["statistics"]["viewCount"]
-        self.likes_count = video["items"][0]["statistics"]["likeCount"]
+        self.like_count = video["items"][0]["statistics"]["likeCount"]
 
     def __str__(self):
         """Возвращает наименование видео"""
-        return self.name
+        return self.title
 
     def __repr__(self):
         """Возвращает все аргументы экземпляра"""
-        return (f"id = {self.video_id}, имя = {self.name}, "
+        return (f"id = {self.video_id}, имя = {self.title}, "
                 f"ссылка = { self.url}, просмотры = {self.view_count}, "
-                f"лайки = {self.likes_count}")
+                f"лайки = {self.like_count}")
 
     def print_info(self):
         """Выводит в консоль информацию о канале."""
