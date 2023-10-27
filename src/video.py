@@ -10,13 +10,20 @@ class Video:
 
     def __init__(self, video_id):
         """Метод для инициализации экземпляра"""
-        video = self.youtube.videos().list(part='snippet,statistics,contentDetails,topicDetails', id=video_id).execute()
+        try:
+            video = self.youtube.videos().list(part='snippet,statistics,contentDetails,topicDetails', id=video_id).execute()
 
-        self.video_id = video_id
-        self.title = video["items"][0]["snippet"]["title"]
-        self.url = f"https://www.youtube.com/watch?v={video_id}"
-        self.view_count = video["items"][0]["statistics"]["viewCount"]
-        self.like_count = video["items"][0]["statistics"]["likeCount"]
+            self.video_id = video_id
+            self.title = video["items"][0]["snippet"]["title"]
+            self.url = f"https://www.youtube.com/watch?v={video_id}"
+            self.view_count = video["items"][0]["statistics"]["viewCount"]
+            self.like_count = video["items"][0]["statistics"]["likeCount"]
+        except IndexError:
+            self.video_id = video_id
+            self.title = None
+            self.url = None
+            self.view_count = None
+            self.like_count = None
 
     def __str__(self):
         """Возвращает наименование видео"""
