@@ -11,7 +11,8 @@ class Video:
     def __init__(self, video_id):
         """Метод для инициализации экземпляра"""
         try:
-            video = self.youtube.videos().list(part='snippet,statistics,contentDetails,topicDetails', id=video_id).execute()
+            video = self.youtube.videos().list(part='snippet,statistics,contentDetails,topicDetails',
+                                               id=video_id).execute()
 
             self.video_id = video_id
             self.title = video["items"][0]["snippet"]["title"]
